@@ -1,8 +1,4 @@
-# unityで格闘ゲームを作ろう(3D)
-
-g-10班
-https://gitlab.cis.iwate-u.ac.jp/2019_g10/MountainDew
-*プレイ方法は下記に書いてある
+# A&T 提出作品
 
 ## 開発の流れ
 
@@ -24,7 +20,8 @@ https://gitlab.cis.iwate-u.ac.jp/2019_g10/MountainDew
 
 ## 実際の作業
 
-`git clone`をした場所で(`$ls` で　G10-Unityって出るところ)
+`git clone`をして 
+`cd art-and-tec`(ここが作業ファイル)
 
 そこで
 ```
@@ -80,7 +77,7 @@ $git push origin xxxxxxxx
 
 (xxxxxxxは自分で決めたブランチ名)
 
-これでGitLab上に、自分が書いたコードが反映されました。
+これでGitHub上に、自分が書いたコードが反映されました。
 
 その後、みんなでデバックし異常がなかったら、masterブランチに佐藤裕紀がマージします。
 
