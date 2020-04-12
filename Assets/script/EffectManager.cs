@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
+    //発生させるエフェクトを管理する。
+    //依存→EffectStatus
+    //Resources→EffectList
+    //Tag→なし
+
     TextAsset csvFile; // CSVファイル
     List<string[]> csvDatas = new List<string[]>(); // CSVの中身を入れるリスト;
 

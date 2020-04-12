@@ -5,6 +5,9 @@ using UnityEngine;
 public class Fire : MonoBehaviour
 {
     //火系統スキル
+    //依存→EffectStatus
+    //Resources→なし
+    //Tag→なし
 
     private float fireTime = 0;
     private ParticleSystem firePar;
