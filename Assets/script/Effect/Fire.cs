@@ -4,38 +4,26 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
-    //火系統スキル
-    //依存→EffectStatus
+    //火系統エフェクト
+    //火の種類に応じて範囲増加
+    //依存→EffectStatus,EffectBehaviour
     //Resources→なし
     //Tag→なし
 
-    private float fireTime = 0;
-    private ParticleSystem firePar;
-    private EffectStatus effectStatus;
     // Start is called before the first frame update
     void Start()
     {
-        firePar = GetComponent<ParticleSystem>();
-        effectStatus = GetComponent<EffectStatus>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (fireTime >= 0.1)
-        {
-            fireTime += Time.deltaTime;
-            if (fireTime > effectStatus.time)
-            {
-                firePar.Stop();
-                fireTime = 0;
-            }
-        }
     }
 
-    public void FireActivate(string str)
+    public void FireActivate()
     {
-        firePar.Play();
-        fireTime = 0.1f;
+        float scale = float.Parse(GetComponent<EffectStatus>().stringData);
+        this.transform.localScale = new Vector3(scale, 1 + (scale - 1) / 2, scale);
+        EffectBehaviour.ParticleDamegeStartAutoMode(this.gameObject);
     }
 }

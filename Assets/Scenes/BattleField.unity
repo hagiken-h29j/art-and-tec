@@ -1002,6 +1002,8 @@ GameObject:
   - component: {fileID: 1623737217}
   - component: {fileID: 1623737221}
   - component: {fileID: 1623737220}
+  - component: {fileID: 1623737222}
+  - component: {fileID: 1623737223}
   m_Layer: 0
   m_Name: FireEff
   m_TagString: Untagged
@@ -5683,7 +5685,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623737216}
   m_LocalRotation: {x: 0.035677843, y: -0, z: -0, w: 0.99936336}
-  m_LocalPosition: {x: 0.2, y: 0.51, z: 8.58}
+  m_LocalPosition: {x: 0.2, y: 0, z: 2.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5722,7 +5724,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1623737220}
         m_MethodName: FireActivate
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5733,6 +5735,32 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!136 &1623737222
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623737216}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Radius: 1.71
+  m_Height: 8.997765
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.3111172, z: -0.0000000040536543}
+--- !u!114 &1623737223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623737216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8c197bb693f2c4b97d030721166000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2048362155
 GameObject:
   m_ObjectHideFlags: 0

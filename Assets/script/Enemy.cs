@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour
     //Resources→なし
     //Tag→なし
 
+    public float HP = 100;
+    public float ATK = 1;
+
     private Rigidbody rb;
     public float maxSpeed = 0.1f;
     // Start is called before the first frame update
@@ -23,6 +26,15 @@ public class Enemy : MonoBehaviour
         if (rb.velocity.magnitude < maxSpeed)
         {
             rb.AddForce(-transform.position);
+        }
+    }
+
+    public void AddDamege(float damege)
+    {
+        HP -= damege;
+        if(HP <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
