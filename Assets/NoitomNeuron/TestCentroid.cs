@@ -6,6 +6,6 @@ public class TestCentroid : MonoBehaviour
     void Start()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
-        rb.centerOfMass = transform.FindChild("CenterOfMass").position;
+        rb.centerOfMass = transform.Find("CenterOfMass").position;
     }
 }

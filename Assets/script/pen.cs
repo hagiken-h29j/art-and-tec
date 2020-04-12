@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class pen : MonoBehaviour {
-
+public class Pen : MonoBehaviour {
+    //ペン。ペンを右人差し指の座標に合わせる。
+    //依存→なし
+    //Resources→なし
+    //Tag→なし
 
     //参照するアニメータークラス
     public Animator targetAnimator;
