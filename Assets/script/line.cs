@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class line : MonoBehaviour
+public class Line : MonoBehaviour
 {
+    //線。writing関数が呼ばれるたび線を伸ばす。
+    //依存→なし
+    //Resources→なし
+    //Tag→なし
+
+
     //参考https://teratail.com/questions/141994
     private LineRenderer lineRenderer;
     private int index = 0;
@@ -32,8 +38,7 @@ public class line : MonoBehaviour
         // 取り残されることなく、一緒に移動・回転するはず
         lineRenderer.useWorldSpace = false;
 
-        // 物体がトリガーに接触している間、常に呼ばれる
-        if (writeActive >= 0 && collision.gameObject.tag == "Pen")
+        if (writeActive >= 0)
         {
             writeActive = 1;
             var pos = collision.transform.position;
@@ -51,8 +56,7 @@ public class line : MonoBehaviour
 
     public void WriteEnd(Collider collision)
     {
-        // 物体がトリガーと離れたとき、１度だけ呼ばれる
-        if (writeActive >= 1 && collision.gameObject.tag == "Pen")
+        if (writeActive >= 0)
         {
             writeActive = -1;
             index = 0;
