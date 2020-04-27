@@ -14,7 +14,7 @@ public class Line : MonoBehaviour
     private LineRenderer lineRenderer;
     private int index = 0;
     public int  writeActive = 0;//0待機1筆記中-1筆記終了
-    public float zpos = 0.5f;
+    //public float zpos = 0.5f;
 
     // Use this for initialization
     void Start()
@@ -42,7 +42,31 @@ public class Line : MonoBehaviour
         {
             writeActive = 1;
             var pos = collision.transform.position;
-            pos.z = zpos;
+            //pos.z = zpos;
+
+            // さらにそれをラインオブジェクトにおけるローカル座標に直し...
+            pos = transform.InverseTransformPoint(pos);
+
+            // 得られたローカル座標をラインレンダラーに追加する
+            index++;
+            lineRenderer.positionCount = index;
+            lineRenderer.SetPosition(index - 1, pos);
+        }
+    }
+    public void Writing(Vector3 vec)
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+
+        // ラインの座標指定を、このラインオブジェクトのローカル座標系を基準にするよう設定を変更
+        // この状態でラインオブジェクトを移動・回転させると、描かれたラインもワールド空間に
+        // 取り残されることなく、一緒に移動・回転するはず
+        lineRenderer.useWorldSpace = false;
+
+        if (writeActive >= 0)
+        {
+            writeActive = 1;
+            var pos = vec;
+            //pos.z = zpos;
 
             // さらにそれをラインオブジェクトにおけるローカル座標に直し...
             pos = transform.InverseTransformPoint(pos);
@@ -55,6 +79,14 @@ public class Line : MonoBehaviour
     }
 
     public void WriteEnd(Collider collision)
+    {
+        if (writeActive >= 0)
+        {
+            writeActive = -1;
+            index = 0;
+        }
+    }
+    public void WriteEnd()
     {
         if (writeActive >= 0)
         {

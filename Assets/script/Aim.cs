@@ -37,7 +37,7 @@ public class Aim : MonoBehaviour
 
             var intersectPoint = x0 + ((h - Vector3.Dot(n, x0)) / (Vector3.Dot(n, m))) * m;
 
-            if(Vector3.Distance(intersectPoint, targetAnimator.GetBoneTransform(HumanBodyBones.Hips).position) <10) aimObject.transform.position = intersectPoint;
+            if(Vector3.Distance(intersectPoint, targetAnimator.GetBoneTransform(HumanBodyBones.Hips).position) <100) aimObject.transform.position = intersectPoint;
         }
     }
 }
