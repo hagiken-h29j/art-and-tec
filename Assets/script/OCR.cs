@@ -22,7 +22,7 @@ public class OCR : MonoBehaviour
     {
         public Image image;
         public List<Feature> features;
-        //public string imageContext;
+        public ImageContext imageContext;
     }
 
     [Serializable]
@@ -60,7 +60,7 @@ public class OCR : MonoBehaviour
     [Serializable]
     public class ImageContext
     {
-        public LatLongRect latLongRect;
+        //public LatLongRect latLongRect;
         public string languageHints;
     }
 
@@ -89,21 +89,14 @@ public class OCR : MonoBehaviour
     [Serializable]
     public class AnnotateImageResponse
     {
-        public List<EntityAnnotation> labelAnnotations;
+        public List<TextAnnotations> textAnnotations;
     }
 
     [Serializable]
-    public class EntityAnnotation
+    public class TextAnnotations
     {
-        public string mid;
         public string locale;
         public string description;
-        public float score;
-        public float confidence;
-        public float topicality;
-        public BoundingPoly boundingPoly;
-        public List<LocationInfo> locations;
-        public List<Property> properties;
     }
 
     [Serializable]
@@ -133,20 +126,35 @@ public class OCR : MonoBehaviour
     }
 
     [Obsolete]
-    static public IEnumerator GetCharOfImage(string base64Image)
+    static public IEnumerator GetCharOfImage(string base64Image, Action<string> callback)
     {
         // requestBodyを作成
-        var requests = new requestBody();
-        requests.requests = new List<AnnotateImageRequest>();
+        var requests = new requestBody
+        {
+            requests = new List<AnnotateImageRequest>()
+        };
 
-        var request = new AnnotateImageRequest();
-        request.image = new Image();
-        request.image.content = base64Image;
+        var request = new AnnotateImageRequest
+        {
+            image = new Image
+            {
+                content = base64Image
+            },
 
-        request.features = new List<Feature>();
-        var feature = new Feature();
-        feature.type = FeatureType.TEXT_DETECTION.ToString();
-        feature.maxResults = 10;
+            imageContext = new ImageContext
+            {
+                languageHints = "ja-JP"
+            },
+
+            features = new List<Feature>()
+        };
+
+        var feature = new Feature
+        {
+            //type = FeatureType.TEXT_DETECTION.ToString(),
+            type = "TEXT_DETECTION",
+            maxResults = 10
+        };
         request.features.Add(feature);
 
         requests.requests.Add(request);
@@ -172,8 +180,17 @@ public class OCR : MonoBehaviour
         {
             // 成功時の処理
             Debug.Log(webRequest.downloadHandler.text);
-            //var responses = JsonUtility.FromJson<ResponseBody>(webRequest.downloadHandler.text);
-            //Debug.Log(responses);
+            var responses = JsonUtility.FromJson<ResponseBody>(webRequest.downloadHandler.text);
+
+            if(responses.responses[0].textAnnotations.Count == 0) //読み込み失敗などレスポンスが帰ってこなかった時
+            {
+                callback("認識失敗");
+            }
+            else
+            {
+                Debug.Log(responses.responses[0].textAnnotations[0].description);
+                callback(responses.responses[0].textAnnotations[0].description);
+            }
 
         }
     }
