@@ -21,6 +21,8 @@ public class Pen : MonoBehaviour {
     public RenderTexture CamTex;
     public EffectManager effectManager;
 
+    public bool debugMode = false;
+
     // Use this for initialization
     void Start () {
         if(markObj == null)
@@ -102,6 +104,12 @@ string path = Application.persistentDataPath;
             {
                 if (child.tag == "Lines")
                 {
+                    if (debugMode)
+                    {
+                        Vector3 mousePos = Input.mousePosition;
+                        mousePos.z = notePos.z;
+                        vec = Camera.main.ScreenToWorldPoint(mousePos);
+                    }
                     child.GetComponent<Line>().Writing(vec);
                 }
             }

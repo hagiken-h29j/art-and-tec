@@ -1300,6 +1300,7 @@ MonoBehaviour:
   note: {fileID: 1194936052}
   CamTex: {fileID: 8400000, guid: 9b498f74b32227e4d81655f6a5392df9, type: 2}
   effectManager: {fileID: 663569314}
+  debugMode: 1
 --- !u!65 &1538819793
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6253,7 +6254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144458256}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 0, z: 4.33}
+  m_LocalPosition: {x: -0.09, y: 0, z: 13.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1185676316}
