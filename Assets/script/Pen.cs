@@ -82,7 +82,7 @@ string path = Application.persistentDataPath;
 
                 //判定
                 StartCoroutine(OCR.GetCharOfImage(str, (r => word = r)));
-                //word = "焔";
+                //word = "火";
                 //word = 
                 //Debug.Log("認識文字：" + word);
                 //各文字に応じた処理
