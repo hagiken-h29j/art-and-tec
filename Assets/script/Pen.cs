@@ -21,6 +21,9 @@ public class Pen : MonoBehaviour {
     public RenderTexture CamTex;
     public EffectManager effectManager;
 
+    public bool debugMode = false;
+    public string word = "";
+
     // Use this for initialization
     void Start () {
         if(markObj == null)
@@ -78,15 +81,21 @@ string path = Application.persistentDataPath;
                 File.WriteAllBytes(path + "/picture.png", bytes);//pngファイルの保存*/
 
                 //判定
-                string word = "";
-                word = "焔";
+                StartCoroutine(OCR.GetCharOfImage(str, (r => word = r)));
+                //word = "火";
                 //word = 
-                Debug.Log("認識文字：" + word);
+                //Debug.Log("認識文字：" + word);
                 //各文字に応じた処理
-                effectManager.EffectSelect(word);
+                //effectManager.EffectSelect(word);
 
             }
         }
+        if(word.Length >= 1)
+        {
+            effectManager.EffectSelect(word);
+            word = "";
+        }
+
 
         //線を書く処理
         if (Input.GetMouseButtonDown(0))
@@ -102,6 +111,12 @@ string path = Application.persistentDataPath;
             {
                 if (child.tag == "Lines")
                 {
+                    if (debugMode)
+                    {
+                        Vector3 mousePos = Input.mousePosition;
+                        mousePos.z = notePos.z;
+                        vec = Camera.main.ScreenToWorldPoint(mousePos);
+                    }
                     child.GetComponent<Line>().Writing(vec);
                 }
             }

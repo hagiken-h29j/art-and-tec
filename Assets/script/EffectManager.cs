@@ -34,11 +34,13 @@ public class EffectManager : MonoBehaviour
 
     public int EffectSelect(string word)
     {
+        Debug.Log(word.Substring(0,1));
         //対応文字をcsvから見つけて発動
-        foreach(string[] effectDatas in csvDatas)
+        foreach (string[] effectDatas in csvDatas)
         {
             //Debug.Log(effectDatas[0] + "：" + word);
-            if (word.Equals(effectDatas[0]))
+            //if (word[0].Equals(effectDatas[0]) 火)
+            if (word.Substring(0, 1).Equals(effectDatas[0]))
             {
                 GameObject.Find(effectDatas[1]).GetComponent<EffectStatus>().EffectActivate(float.Parse(effectDatas[2]), float.Parse(effectDatas[3]), effectDatas[4]);
                 break;
