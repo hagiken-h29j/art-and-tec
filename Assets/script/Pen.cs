@@ -22,6 +22,7 @@ public class Pen : MonoBehaviour {
     public EffectManager effectManager;
 
     public bool debugMode = false;
+    public string word = "";
 
     // Use this for initialization
     void Start () {
@@ -80,15 +81,21 @@ string path = Application.persistentDataPath;
                 File.WriteAllBytes(path + "/picture.png", bytes);//pngファイルの保存*/
 
                 //判定
-                string word = "";
-                word = "焔";
+                StartCoroutine(OCR.GetCharOfImage(str, (r => word = r)));
+                //word = "焔";
                 //word = 
-                Debug.Log("認識文字：" + word);
+                //Debug.Log("認識文字：" + word);
                 //各文字に応じた処理
-                effectManager.EffectSelect(word);
+                //effectManager.EffectSelect(word);
 
             }
         }
+        if(word.Length >= 1)
+        {
+            effectManager.EffectSelect(word);
+            word = "";
+        }
+
 
         //線を書く処理
         if (Input.GetMouseButtonDown(0))
