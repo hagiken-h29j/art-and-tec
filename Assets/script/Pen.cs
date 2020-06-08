@@ -20,13 +20,19 @@ public class Pen : MonoBehaviour {
     private GameObject oneline;
     public RenderTexture CamTex;
     public EffectManager effectManager;
+    public GameObject statusCube;  //x:マウスクリックdefo0down1継続2 y:文字認識++
 
     public bool debugMode = false;
     public string word = "";
 
     // Use this for initialization
-    void Start () {
-        if(markObj == null)
+    void Start ()
+    {
+        if (targetAnimator == null)
+        {
+            targetAnimator = GameObject.Find("unitychan").GetComponent<Animator>();
+        }
+        if (markObj == null)
         {
             markObj = transform.GetChild(0).gameObject;
         }
@@ -36,12 +42,16 @@ public class Pen : MonoBehaviour {
             note = GameObject.Find("Note");
         }
         notePos = note.transform.position;
+        if (effectManager == null)
+        {
+            effectManager = GameObject.Find("EffMan").GetComponent<EffectManager>();
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
         //penの座標変更処理
-        transform.position = targetAnimator.GetBoneTransform(HumanBodyBones.RightIndexIntermediate).position;
+        transform.position = targetAnimator.GetBoneTransform(HumanBodyBones.RightHand).position;
         //https://qiita.com/edo_m18/items/c8808f318f5abfa8af1e
         var n = -notePos;
         var x = notePos;
@@ -56,6 +66,9 @@ public class Pen : MonoBehaviour {
         //文字認識系統
         if (Input.GetKeyDown(KeyCode.Return)  || Input.GetMouseButtonDown(1))//enterで文字判定処理、ライン消去
         {
+            Vector3 statusVec = statusCube.transform.localPosition;
+            statusVec.y +=1 ;
+            statusCube.transform.localPosition = statusVec;
             foreach (Transform child in note.transform)//ライン消去
             {
                 if (child.tag == "Lines")
@@ -103,6 +116,9 @@ string path = Application.persistentDataPath;
 
             GameObject objBuff = Instantiate(oneline, transform.position, Quaternion.identity);
             objBuff.transform.parent = note.transform;
+            Vector3 statusVec = statusCube.transform.localPosition;
+            statusVec.x = 1;
+            statusCube.transform.localPosition = statusVec;
         }
         else if (Input.GetMouseButton(0))
         {
@@ -120,6 +136,9 @@ string path = Application.persistentDataPath;
                     child.GetComponent<Line>().Writing(vec);
                 }
             }
+            Vector3 statusVec = statusCube.transform.localPosition;
+            statusVec.x = 2;
+            statusCube.transform.localPosition = statusVec;
         }
         else if (Input.GetMouseButtonUp(0))
         {
@@ -130,6 +149,9 @@ string path = Application.persistentDataPath;
                     child.GetComponent<Line>().WriteEnd();
                 }
             }
+            Vector3 statusVec = statusCube.transform.localPosition;
+            statusVec.x = 0;
+            statusCube.transform.localPosition = statusVec;
         }
     }
 }
