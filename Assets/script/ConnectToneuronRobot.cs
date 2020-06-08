@@ -128,7 +128,8 @@ public class ConnectToneuronRobot : MonoBehaviour {
 
 
         HumanBodyBones.RightHand,
-        HumanBodyBones.RightThumbProximal,
+        HumanBodyBones.LeftHand,
+      /*  HumanBodyBones.RightThumbProximal,
         HumanBodyBones.RightThumbIntermediate,
         HumanBodyBones.RightThumbDistal,
         HumanBodyBones.RightIndexProximal,
@@ -142,7 +143,7 @@ public class ConnectToneuronRobot : MonoBehaviour {
         HumanBodyBones.RightRingDistal,
         HumanBodyBones.RightLittleProximal,
         HumanBodyBones.RightLittleIntermediate,
-        HumanBodyBones.RightLittleDistal,
+        HumanBodyBones.RightLittleDistal,*/
 
     };
 }

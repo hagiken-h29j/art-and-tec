@@ -8,6 +8,7 @@ public class Aim : MonoBehaviour
     //依存→なし
     //Resources→なし
     //Tag→なし
+    //→aimObject;targetAnimator;
 
 
     public Animator targetAnimator;
@@ -24,6 +25,17 @@ public class Aim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(aimObject == null)
+        {
+            if(GameObject.Find("Aim(Clone)") != null)
+            {
+                aimObject = GameObject.Find("Aim(Clone)");
+            }
+            else
+            {
+                return;
+            }
+        }
         Vector3 startPos = targetAnimator.GetBoneTransform(startBone).position;
         Vector3 endPos = targetAnimator.GetBoneTransform(endBone).position;
         if (startPos.y > endPos.y)
